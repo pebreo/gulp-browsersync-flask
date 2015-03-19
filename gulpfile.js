@@ -8,4 +8,12 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('build/js'))
 });
 
-gulp.task('default', ['scripts']);
+gulp.task('handlechange', function() {
+  console.log('something changed')
+});
+
+gulp.task('watch', function() {
+    gulp.watch('js/*.js', ['scripts','handlechange'])
+});
+
+gulp.task('default', ['watch']);

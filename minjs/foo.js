@@ -1,1 +1,0 @@
-function bar(){var r=1,n=2;return r+n}
