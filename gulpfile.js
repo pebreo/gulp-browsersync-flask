@@ -1,9 +1,11 @@
 var gulp = require('gulp'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    plumber = require('gulp-plumber');
 
 // Uglify 
 gulp.task('scripts', function() {
   gulp.src('js/*.js')
+    .pipe(plumber())
     .pipe(uglify())
     .pipe(gulp.dest('build/js'))
 });
