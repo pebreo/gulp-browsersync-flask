@@ -1,6 +1,10 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
-    plumber = require('gulp-plumber');
+    plumber = require('gulp-plumber'),
+    browserSync = require('browser-sync');
+
+var reload = browserSync.reload;
+var exec = require('child_process').exec;
 
 // Uglify 
 gulp.task('scripts', function() {
@@ -10,12 +14,19 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('build/js'))
 });
 
-gulp.task('handlechange', function() {
-  console.log('something changed')
+//Run Flask server
+gulp.task('runserver', function() {
+   
+    var proc = exec('python app.py');
 });
 
-gulp.task('watch', function() {
-    gulp.watch('js/*.js', ['scripts','handlechange'])
-});
+// Watch Files For Changes & Reload, the default task
+gulp.task('default', ['runserver'], function () {
+  browserSync({
+    notify: true,
+    proxy: "127.0.0.1:5000"
+  });
+ 
+  gulp.watch(['templates/*.html'], reload);
 
-gulp.task('default', ['watch']);
+});
