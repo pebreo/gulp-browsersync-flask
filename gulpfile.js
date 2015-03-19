@@ -1,5 +1,8 @@
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    uglify = require('gulp-uglify');
 
 gulp.task('default', function() {
-    console.log('hello world');
+  gulp.src('js/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('minjs'))
 });
