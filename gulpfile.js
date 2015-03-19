@@ -23,10 +23,10 @@ gulp.task('runserver', function() {
 // Watch Files For Changes & Reload, the default task
 gulp.task('default', ['runserver'], function () {
   browserSync({
-    notify: true,
-    proxy: "127.0.0.1:5000"
+    notify: false,
+    proxy: "127.0.0.1:5003"
   });
  
-  gulp.watch(['templates/*.html'], reload);
+  gulp.watch(['templates/*.*'], reload);
 
 });
