@@ -33,6 +33,6 @@ if __name__ == '__main__':
 ```
 
 Step 6. Run gulp
-```
+```bash
 gulp # this will run flask and open a browser
 ```
