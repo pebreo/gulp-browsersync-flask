@@ -20,14 +20,16 @@ Step 4. Install requirements
 
 ```bash
 cd myproject
-npm install
+npm install # this will create node_modules/ subdirectory in your directory
 ```
 
 Run gulp + browsersync + flask
 ------------------------------
 Step 5. Make sure your flask port is set to `5003`:
-```
-app.run(debug=True, port=5003)
+```python
+# app.py
+if __name__ == '__main__':
+    app.run(debug=True, port=5003)
 ```
 
 Step 6. Run gulp
