@@ -6,21 +6,20 @@ var gulp = require('gulp'),
 var reload = browserSync.reload;
 var exec = require('child_process').exec;
 
-// Uglify 
-gulp.task('scripts', function() {
-  gulp.src('js/*.js')
-    .pipe(plumber())
-    .pipe(uglify())
-    .pipe(gulp.dest('build/js'))
-});
+// Uglify javascript
+// gulp.task('scripts', function() {
+//   gulp.src('js/*.js')
+//     .pipe(plumber())
+//     .pipe(uglify())
+//     .pipe(gulp.dest('build/js'))
+// });
 
 //Run Flask server
 gulp.task('runserver', function() {
-   
     var proc = exec('python app.py');
 });
 
-// Watch Files For Changes & Reload, the default task
+// Default task: Watch Files For Changes & Reload browser
 gulp.task('default', ['runserver'], function () {
   browserSync({
     notify: false,
