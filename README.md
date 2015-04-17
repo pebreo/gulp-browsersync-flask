@@ -36,3 +36,8 @@ Step 6. Run gulp
 ```bash
 gulp # this will run flask and open a browser
 ```
+
+Tips and tricks
+------------
+If you have trouble connecting, make sure the port is set to the correct port.
+Also, you might have to goto the BrowserSync control panel (localhost:3001) and click 'Reload Browser' to refresh it.
