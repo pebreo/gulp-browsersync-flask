@@ -1,31 +1,34 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
-    plumber = require('gulp-plumber'),
     browserSync = require('browser-sync');
 
 var reload = browserSync.reload;
 var exec = require('child_process').exec;
 
-// Uglify javascript
-// gulp.task('scripts', function() {
-//   gulp.src('js/*.js')
-//     .pipe(plumber())
-//     .pipe(uglify())
-//     .pipe(gulp.dest('build/js'))
-// });
-
 //Run Flask server
-gulp.task('runserver', function() {
-    var proc = exec('python app.py');
+gulp.task('runserver', () => {
+    var proc = exec('python app.py', function(err, stdout, stderr){
+        console.log(stdout);
+        // Check for errors of python script to avoid empty browserSync running.
+        if(stderr){
+            console.log(stderr);
+        }
+        else{
+            // No errors, run browserSync
+            gulp.start('browser-sync');
+        }
+    });
 });
 
-// Default task: Watch Files For Changes & Reload browser
-gulp.task('default', ['runserver'], function () {
+gulp.task('browser-sync', function() {
   browserSync({
     notify: false,
-    proxy: "127.0.0.1:5003"
+    proxy: "127.0.0.1:5003",
   });
- 
-  gulp.watch(['templates/*.*'], reload);
-
 });
+
+gulp.task('start', () => {
+    gulp.watch(['**/*.py', 'templates/**/*.html', '!env', '!node_modules'], browserSync.reload);
+});
+
+gulp.task('default', ['start', 'runserver']);
