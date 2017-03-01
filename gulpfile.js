@@ -12,7 +12,7 @@ gulp.task('runserver', () => {
     var proc = exec('python app.py', function(err, stdout, stderr){
         console.log(stdout);
         console.log(stderr);
-        error = false;
+        error = true;
     });
     if(!error){
         // No errors, run browserSync
