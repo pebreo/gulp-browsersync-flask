@@ -7,17 +7,17 @@ var exec = require('child_process').exec;
 
 //Run Flask server
 gulp.task('runserver', () => {
+    // Check for errors of python script to avoid empty browserSync running.
+    var error = false;
     var proc = exec('python app.py', function(err, stdout, stderr){
         console.log(stdout);
-        // Check for errors of python script to avoid empty browserSync running.
-        if(stderr){
-            console.log(stderr);
-        }
-        else{
-            // No errors, run browserSync
-            gulp.start('browser-sync');
-        }
+        console.log(stderr);
+        error = false;
     });
+    if(!error){
+        // No errors, run browserSync
+        gulp.start('browser-sync');
+    }
 });
 
 gulp.task('browser-sync', function() {
